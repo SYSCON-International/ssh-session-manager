@@ -112,8 +112,8 @@ class SSHSession:
                     if captured_text != line:
                         command.specifically_captured_output_text = captured_text
 
-    def information_print(self, summary, command, border_symbol="*"):
-        searchable_text = f"{border_symbol} Build and Deploy"
+    def information_print(self, searchable_text, summary, command, border_symbol="*"):
+        searchable_text = f"{border_symbol} {searchable_text}"
         summary = f"{border_symbol} Summary: {summary} "
         command = f"{border_symbol} Command: {command} "
         ssh_session = f"{border_symbol} SSH Session: {self} "

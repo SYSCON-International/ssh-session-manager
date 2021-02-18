@@ -5,13 +5,13 @@ class SSHSession:
     OPEN_SSH_SESSION_WITH_PARAMIKO_TEXT = "Open SSH session with Paramiko"
     CLOSE_SSH_SESSION_WITH_PARAMIKO_TEXT = "Close SSH session with Paramiko"
 
-    def __init__(self, name, ip_address, username, password, port=22):
+    def __init__(self, name, ip_address, username, password, session_description, port=22):
         self.name = name
         self.ip_address = ip_address
-        self.port = port
-
         self.username = username
         self.password = password
+        self.session_description = session_description
+        self.port = port
 
         self.paramiko_ssh_client = None
 
@@ -112,16 +112,16 @@ class SSHSession:
                     if captured_text != line:
                         command.specifically_captured_output_text = captured_text
 
-    def information_print(self, searchable_text, summary, command, border_symbol="*"):
-        searchable_text = f"{border_symbol} {searchable_text}"
+    def information_print(self, summary, command, border_symbol="*"):
+        session_description = f"{border_symbol} {self.session_description}"
         summary = f"{border_symbol} Summary: {summary} "
         command = f"{border_symbol} Command: {command} "
         ssh_session = f"{border_symbol} SSH Session: {self} "
 
-        lines = [searchable_text, summary, command, ssh_session]
+        lines = [session_description, summary, command, ssh_session]
         longest_line_length = len(max(lines, key=len))
 
-        searchable_text = searchable_text.ljust(longest_line_length) + border_symbol
+        session_description = session_description.ljust(longest_line_length) + border_symbol
         summary = summary.ljust(longest_line_length) + border_symbol
         command = command.ljust(longest_line_length) + border_symbol
         ssh_session = ssh_session.ljust(longest_line_length) + border_symbol
@@ -132,7 +132,7 @@ class SSHSession:
 
         print()
         print(border_line)
-        print(searchable_text)
+        print(session_description)
         print(summary)
         print(command)
         print(ssh_session)

@@ -1,3 +1,5 @@
+import os
+
 import paramiko
 
 
@@ -76,10 +78,34 @@ class SSHSession:
     #     sftp_client.get(remote_source_file_path, local_target_file_path)
     #     sftp_client.close()
 
-    def upload_file(self, local_source_file_path, remote_target_file_path):
+    def upload_file(self, local_source_file_path, remote_target_file_path, should_make_missing_directories=True):
         sftp_client = self.paramiko_ssh_client.open_sftp()
+
+        if should_make_missing_directories:
+            self.makedirs(sftp_client, remote_target_file_path)
+
         sftp_client.put(local_source_file_path, remote_target_file_path)
         sftp_client.close()
+
+    # Taken from: https://stackoverflow.com/a/14819803
+    def makedirs(self, sftp, remote_directory):
+        """Change to this directory, recursively making new folders if needed.
+        Returns True if any folders were created."""
+        if remote_directory == "/":
+            # Absolute path so change directory to root
+            sftp.chdir("/")
+            return
+        if remote_directory == "":
+            # Top-level relative directory must exist
+            return
+        try:
+            sftp.chdir(remote_directory) # Sub-directory exists
+        except IOError:
+            directory_name, base_name = os.path.split(remote_directory.rstrip("/"))
+            self.makedirs(sftp, directory_name) # Make parent directories
+            sftp.mkdir(base_name) # Sub-directory missing, so created it
+            sftp.chdir(base_name)
+            return True
 
     def print_command_output(self, command):
         if self.session_opened_successfully and self.command_ran_successfully:

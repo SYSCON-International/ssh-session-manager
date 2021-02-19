@@ -7,7 +7,7 @@ setuptools.setup(
     name="ssh-session-manager",
     version="0.0.1",
     author="SYSCON International",
-    author_email="author@example.com",
+    author_email="dev@syscon-intl.com",
     description="Execute commands on multiple remote SSH sessions",
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -18,11 +18,6 @@ class SSHSessionManager:
             for ssh_session in self.ssh_sessions:
                 ssh_session.print_command_output(command)
 
-    # def download_file_from_all_sessions(self, remote_source_file_path, local_target_file_path):
-    #     for ssh_session in self.ssh_sessions:
-    #         # Will need to figure out how to resolve names of same file (probably by appending it with "_<number>"
-    #         ssh_session.download_file(self, remote_source_file_path, local_target_file_path)
-
     def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path):
         for ssh_session in self.ssh_sessions:
             ssh_session.upload_file(local_source_file_path, remote_target_file_path)

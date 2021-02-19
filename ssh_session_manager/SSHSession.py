@@ -1,4 +1,5 @@
 import os
+from pathlib import PurePosixPath
 
 import paramiko
 
@@ -73,24 +74,21 @@ class SSHSession:
                 self.information_print("Command failed to run", command)
                 self.command_ran_successfully = False
 
-    # def download_file(self, remote_source_file_path, local_target_file_path):
-    #     sftp_client = self.paramiko_ssh_client.open_sftp()
-    #     sftp_client.get(remote_source_file_path, local_target_file_path)
-    #     sftp_client.close()
-
     def upload_file(self, local_source_file_path, remote_target_file_path, should_make_missing_directories=True):
         sftp_client = self.paramiko_ssh_client.open_sftp()
 
         if should_make_missing_directories:
-            self.makedirs(sftp_client, remote_target_file_path)
+            remote_target_file_path = PurePosixPath(remote_target_file_path)
+            self.__makedirs(sftp_client, str(remote_target_file_path.parent))
 
-        sftp_client.put(local_source_file_path, remote_target_file_path)
+        sftp_client.put(str(local_source_file_path), str(remote_target_file_path))
         sftp_client.close()
 
     # Taken from: https://stackoverflow.com/a/14819803
-    def makedirs(self, sftp, remote_directory):
+    def __makedirs(self, sftp, remote_directory):
         """Change to this directory, recursively making new folders if needed.
         Returns True if any folders were created."""
+
         if remote_directory == "/":
             # Absolute path so change directory to root
             sftp.chdir("/")
@@ -101,8 +99,8 @@ class SSHSession:
         try:
             sftp.chdir(remote_directory) # Sub-directory exists
         except IOError:
-            directory_name, base_name = os.path.split(remote_directory.rstrip("/"))
-            self.makedirs(sftp, directory_name) # Make parent directories
+            directory_name, base_name = os.path.split(str(remote_directory.rstrip("/")))
+            self.__makedirs(sftp, directory_name) # Make parent directories
             sftp.mkdir(base_name) # Sub-directory missing, so created it
             sftp.chdir(base_name)
             return True

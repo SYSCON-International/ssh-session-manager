@@ -1,3 +1,6 @@
 #!/bin/bash
 
-python3 setup.py sdist upload
+# Make sure you have `twine` installed:
+# `pip3 install twine`
+
+twine upload dist/*

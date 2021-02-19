@@ -4,3 +4,4 @@ __pycache__
 .pytest_cache
 .vscode
 dist
+ssh_session_manager.egg-info

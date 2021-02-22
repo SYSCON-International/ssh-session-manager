@@ -38,8 +38,10 @@ class SSHSession:
 
             self.paramiko_ssh_client = paramiko_ssh_client
             self.session_opened_successfully = True
-        except OSError:
-            self.information_print("Session failed to open, all operations for this session be skipped", SSHSession.CLOSE_SSH_SESSION_WITH_PARAMIKO_TEXT)
+        except OSError as os_error:
+            self.information_print(
+                f"Session failed to open with error: \"{os_error}\".  All operations for this session be skipped", SSHSession.CLOSE_SSH_SESSION_WITH_PARAMIKO_TEXT
+            )
             self.session_opened_successfully = False
 
     def close_ssh_session(self):
@@ -70,8 +72,8 @@ class SSHSession:
                     self.standard_input.flush()
 
                 self.command_ran_successfully = True
-            except EOFError:
-                self.information_print("Command failed to run", command)
+            except EOFError as eof_error:
+                self.information_print(f"Command failed to run with error: \"{eof_error}\"", command)
                 self.command_ran_successfully = False
 
     def upload_file(self, local_source_file_path, remote_target_file_path, should_make_missing_directories=True):

@@ -40,7 +40,7 @@ class SSHSession:
             self.session_opened_successfully = True
         except OSError as os_error:
             self.information_print(
-                f"Session failed to open with error: \"{os_error}\".  All operations for this session be skipped", SSHSession.CLOSE_SSH_SESSION_WITH_PARAMIKO_TEXT
+                f"Session failed to open with error: \"{os_error}\".  All future operations for this session be skipped", SSHSession.CLOSE_SSH_SESSION_WITH_PARAMIKO_TEXT
             )
             self.session_opened_successfully = False
 

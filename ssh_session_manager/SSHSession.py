@@ -82,6 +82,9 @@ class SSHSession:
             self.__makedirs(sftp_client, str(remote_target_file_path.parent))
 
         sftp_client.put(str(local_source_file_path), str(remote_target_file_path))
+
+        self.information_print("File uploading", f"Uploading {local_source_file_path.name}")
+
         sftp_client.close()
 
     # Taken from: https://stackoverflow.com/a/14819803

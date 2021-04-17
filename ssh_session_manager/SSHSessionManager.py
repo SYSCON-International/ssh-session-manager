@@ -18,6 +18,14 @@ class SSHSessionManager:
             for ssh_session in self.ssh_sessions:
                 ssh_session.print_command_output(command)
 
+    def get_command_output_information_dictionary(self, ssh_session, command):
+        if ssh_session in self.ssh_sessions:
+            command_output_information_dictionary = ssh_session.get_command_output_information_dictionary(command)
+        else:
+            command_output_information_dictionary = None
+
+        return command_output_information_dictionary
+
     def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path):
         for ssh_session in self.ssh_sessions:
             ssh_session.upload_file(local_source_file_path, remote_target_file_path)

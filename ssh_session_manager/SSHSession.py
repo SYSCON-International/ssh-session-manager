@@ -25,6 +25,8 @@ class SSHSession:
         self.session_opened_successfully = None
         self.command_ran_successfully = None
 
+        self.command_to_command_output_information_dictionary = {}
+
     def __str__(self):
         return f"{self.name} ({self.ip_address})"
 
@@ -115,8 +117,11 @@ class SSHSession:
             if command.command_provides_output:
                 self.information_print("Displaying command output", command)
 
-            # This is required even if the command doesn't provide output because it blocks execution of the script until the command finishes.  If this is included in the
-            # if-statement above, the script will exit before the command finishes running.
+            command_output_information_dictionary = {
+                "captured_output_text": None,
+                "exit_status": None
+            }
+
             while True:
                 try:
                     line = self.standard_output.readline()
@@ -132,14 +137,20 @@ class SSHSession:
                 if command.command_provides_output:
                     captured_text = line
 
-                    if command.prefix_to_match_on_to_capture_specific_output_line is not None and line.startswith(command.prefix_to_match_on_to_capture_specific_output_line):
-                        captured_text = captured_text.replace(command.prefix_to_match_on_to_capture_specific_output_line, "")
+                    if command.prefix_to_match_on_to_capture_output_line is not None and line.startswith(command.prefix_to_match_on_to_capture_output_line):
+                        captured_text = captured_text.replace(command.prefix_to_match_on_to_capture_output_line, "")
 
-                    if command.suffix_to_match_on_to_capture_specific_output_line is not None and line.endswith(command.suffix_to_match_on_to_capture_specific_output_line):
-                        captured_text = captured_text.replace(command.suffix_to_match_on_to_capture_specific_output_line, "")
+                    if command.suffix_to_match_on_to_capture_output_line is not None and line.endswith(command.suffix_to_match_on_to_capture_output_line):
+                        captured_text = captured_text.replace(command.suffix_to_match_on_to_capture_output_line, "")
 
                     if captured_text != line:
-                        command.specifically_captured_output_text = captured_text
+                        command_output_information_dictionary["captured_output_text"] = captured_text
+
+            command_output_information_dictionary["exit_status"] = self.standard_output.channel.recv_exit_status()
+            self.command_to_command_output_information_dictionary[command] = command_output_information_dictionary
+
+    def get_command_output_information_dictionary(self, command):
+        return self.command_to_command_output_information_dictionary.get(command, None)
 
     def information_print(self, summary, command, border_symbol="*"):
         session_description = f"{border_symbol} {self.session_description}"

@@ -36,6 +36,5 @@ launched concurrently.
 
 - Rework system to also store items for stderr into the dictionaries on `SSHSession`; there should
   probably be some sort of sub dictionary with a "standard output" key and a "standard error" key.
-- This will require changes to teh way output is capture, so it may as well be done with the changes
+- This will require changes to the way output is capture, so it may as well be done with the changes
   above for SSHSession
-- Return codes?  Maybe it can also be placed into the dictionary

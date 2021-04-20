@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v0.2.0
+
+- **Note:** v0.2.0 has breaking changes
+- The `SSHSessionManager` now spins up a separate thread for each `SSHSession`, a change needed to
+  fix the previous strange requirement of having to call a `print_command_output()` in order to keep
+  the `SSHSession` from exiting before the command finished.  This function no longer exists,
+  blocking happens automatically, and printing out output is set via an input parameter to both
+  `run_commands_in_all_ssh_sessions()` and `run_command_in_ssh_session()`.
+- `SSHSession`s now store standard output, standard error, and the command exit code
+- `SSHSession` no longer provides the ability to capture specific output.  Since all output is now
+  captured and saved, it is up to the user to search through it to find what they need.
+- Removed some code, marked some items as "private" via `__`.
+- Some functions have been renamed
+- `SSHSession` no longer takes in a `session_description` variable in the `__init__()`
+
 ## v0.1.0
 
 - **NOTE:** v0.1.0 has breaking changes

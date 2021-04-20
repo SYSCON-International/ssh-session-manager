@@ -82,7 +82,7 @@ class SSHSession:
 
         sftp_client.put(str(local_source_file_path), str(remote_target_file_path))
 
-        self.__information_print("File uploading", f"Uploading {local_source_file_path.name}")
+        self.__information_print("Uploading file", f"Uploading {local_source_file_path.name}")
 
         sftp_client.close()
 

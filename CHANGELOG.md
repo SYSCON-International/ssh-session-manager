@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.2.1
+
+- **Note:** v0.2.1 has breaking changes
+- `get_command_output_information_dictionary()` has been renamed to `get_command_output_dictionary()`
+
 ## v0.2.0
 
 - **Note:** v0.2.0 has breaking changes

@@ -1,6 +1,5 @@
 # TODO
 
-- Add to the `README.md` file (examples, description, etc)
 - Changes that will affect the `Command` class:
     - Ability to turn off command output per command (for both standard output and standard error)
     - Ability to turn off command output storage on the `SSHSession`? (for both standard output and

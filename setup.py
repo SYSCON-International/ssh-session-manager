@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as file_handle:
 
 setuptools.setup(
     name="ssh-session-manager",
-    version="0.2.0",
+    version="0.2.1",
     author="SYSCON International",
     author_email="dev@syscon-intl.com",
-    description="Execute commands on multiple remote SSH sessions",
+    description="Open SSH sessions, send commands, and capture output",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Syscon-Plantstar/ssh-session-manager",

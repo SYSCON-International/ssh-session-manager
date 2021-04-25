@@ -17,3 +17,5 @@
 - Add unit tests
     - Either real ones that use a configuration file to connect to real servers and perform real
       actions, or using a mock library to create fake connection objects.
+- Add code documentation (doc-strings)
+- Add type hints (?)

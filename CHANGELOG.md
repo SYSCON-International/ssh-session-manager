@@ -3,8 +3,9 @@
 ## v0.2.1
 
 - **Note:** v0.2.1 has breaking changes
-- `get_command_output_information_dictionary()` has been renamed to `get_command_output_dictionary()`
-- Documentation added
+- `get_command_output_information_dictionary()` has been renamed to
+  `get_command_output_dictionary()`
+- Some documentation added
 - General package / repository cleanup
 
 ## v0.2.0

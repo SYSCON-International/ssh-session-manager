@@ -2,7 +2,7 @@
 
 ## v0.3.0
 
-- Added ping methods to `SSHSessoin` and `SSHSessionManager`
+- Added ping methods to `SSHSession` and `SSHSessionManager`
 ## v0.2.0
 
 - **Note:** v0.2.0 has breaking changes

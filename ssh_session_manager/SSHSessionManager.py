@@ -63,7 +63,7 @@ class SSHSessionManager:
 
         return ping_dictionary
 
-    # A basic wrapper function so that I dont have to add thread-specific modifications to `SSHSession.ping_cached()`
+    # A basic wrapper function so that `SSHSession.ping_cached()` doesn't need to be modified to take in a `ping_result_dictionary`
     @staticmethod
     def __ping_all_thread_main(ssh_session, ping_result_dictionary):
         ping_was_successful = ssh_session.ping()

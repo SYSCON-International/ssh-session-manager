@@ -1,7 +1,6 @@
 import os
 import platform
 import subprocess
-from functools import cache
 from pathlib import PurePosixPath
 
 import paramiko
@@ -114,10 +113,6 @@ class SSHSession:
             sftp.chdir(base_name)
 
             return True
-
-    @cache
-    def ping_cached(self):
-        return self.ping()
 
     # Based on: https://stackoverflow.com/a/32684938
     def ping(self):

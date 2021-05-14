@@ -1,5 +1,4 @@
 import threading
-from functools import cache
 
 
 class SSHSessionManager:
@@ -43,10 +42,6 @@ class SSHSessionManager:
     def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path):
         for ssh_session in self.ssh_sessions:
             ssh_session.upload_file(local_source_file_path, remote_target_file_path)
-
-    @cache
-    def ping_all_cached(self):
-        return self.ping_all()
 
     def ping_all(self):
         ping_dictionary = {}

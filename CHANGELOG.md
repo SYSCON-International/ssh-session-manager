@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.3.1
+
+- Removed cached ping methods - these never really made much sense
+
 ## v0.3.0
 
 - Added ping methods to `SSHSession` and `SSHSessionManager`

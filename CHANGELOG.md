@@ -3,6 +3,8 @@
 ## v0.3.1
 
 - Removed cached ping methods - these never really made much sense
+- Swapped out custom ping method for [ping3](https://pypi.org/project/ping3/), which allows us to
+  provide a `timeout_in_seconds` parameter to ping methods
 
 ## v0.3.0
 

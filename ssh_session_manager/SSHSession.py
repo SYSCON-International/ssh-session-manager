@@ -1,9 +1,8 @@
 import os
-import platform
-import subprocess
 from pathlib import PurePosixPath
 
 import paramiko
+from ping3 import ping
 
 
 class SSHSession:
@@ -114,24 +113,11 @@ class SSHSession:
 
             return True
 
-    # Based on: https://stackoverflow.com/a/32684938
-    def ping(self):
-        """
-        Returns True if host (str) responds to a ping request.
-        Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
-        """
+    def ping(self, timeout_in_seconds=4):
+        if ping(self.ip_address, timeout=timeout_in_seconds):
+            return True
 
-        if platform.system().lower() == "windows":
-            ping_system_parameter = "n"
-        else:
-            ping_system_parameter = "c"
-
-        ping_command = ["ping", f"-{ping_system_parameter}", "1", self.ip_address]
-
-        # Use `subprocess.DEVNULL` to suppress ping output
-        ping_was_successful = subprocess.call(ping_command, stderr=subprocess.STDOUT, stdout=subprocess.DEVNULL) == 0
-
-        return ping_was_successful
+        return False
 
     # TODO: Consider the idea of returning this after running `run_command_in_ssh_session()` and from `run_commands_in_all_ssh_sessions()` instead of storing it
     # Not sure which solution is better

@@ -43,12 +43,12 @@ class SSHSessionManager:
         for ssh_session in self.ssh_sessions:
             ssh_session.upload_file(local_source_file_path, remote_target_file_path)
 
-    def ping_all(self):
+    def ping_all(self, timeout_in_seconds=4):
         ping_dictionary = {}
         threads = []
 
         for ssh_session in self.ssh_sessions:
-            thread = threading.Thread(target=SSHSessionManager.__ping_all_thread_main, args=(ssh_session, ping_dictionary))
+            thread = threading.Thread(target=SSHSessionManager.__ping_all_thread_main, args=(ssh_session, ping_dictionary, timeout_in_seconds))
             thread.start()
 
             threads.append(thread)
@@ -60,6 +60,6 @@ class SSHSessionManager:
 
     # A basic wrapper function so that `SSHSession.ping_cached()` doesn't need to be modified to take in a `ping_result_dictionary`
     @staticmethod
-    def __ping_all_thread_main(ssh_session, ping_result_dictionary):
-        ping_was_successful = ssh_session.ping()
+    def __ping_all_thread_main(ssh_session, ping_result_dictionary, timeout_in_seconds):
+        ping_was_successful = ssh_session.ping(timeout_in_seconds=timeout_in_seconds)
         ping_result_dictionary[ssh_session] = ping_was_successful

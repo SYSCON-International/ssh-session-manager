@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as file_handle:
 
 setuptools.setup(
     name="ssh-session-manager",
-    version="0.2.1",
+    version="0.3.2",
     author="SYSCON International",
     author_email="dev@syscon-intl.com",
     description="Open SSH sessions, send commands, and capture output",
@@ -20,6 +20,7 @@ setuptools.setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "paramiko==2.7.2"
+        "paramiko==2.7.2",
+        "ping3==2.7.0"
     ]
 )

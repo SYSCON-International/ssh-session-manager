@@ -2,6 +2,7 @@ import os
 from pathlib import PurePosixPath
 
 import paramiko
+from ping3 import ping
 
 
 class SSHSession:
@@ -111,6 +112,12 @@ class SSHSession:
             sftp.chdir(base_name)
 
             return True
+
+    def ping(self, timeout_in_seconds=4):
+        if ping(self.ip_address, timeout=timeout_in_seconds):
+            return True
+
+        return False
 
     # TODO: Consider the idea of returning this after running `run_command_in_ssh_session()` and from `run_commands_in_all_ssh_sessions()` instead of storing it
     # Not sure which solution is better

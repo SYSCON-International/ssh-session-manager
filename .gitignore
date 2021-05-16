@@ -5,3 +5,4 @@ __pycache__
 .vscode
 dist
 ssh_session_manager.egg-info
+virtual_environment

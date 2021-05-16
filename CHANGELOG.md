@@ -1,7 +1,16 @@
 # CHANGELOG
 
+## v0.3.2
+
+- **Note:** v0.3.2 has breaking changes
+- `get_command_output_information_dictionary()` has been renamed to
+  `get_command_output_dictionary()`
+- Some documentation added
+- General package / repository cleanup
+
 ## v0.3.1
 
+- **Note:** v0.3.1 has breaking changes
 - Removed cached ping methods - these never really made much sense
 - Swapped out custom ping method for [ping3](https://pypi.org/project/ping3/), which allows us to
   provide a `timeout_in_seconds` parameter to ping methods

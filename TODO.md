@@ -1,6 +1,5 @@
 # TODO
 
-- Add to the `README.md` file (examples, description, etc)
 - Changes that will affect the `Command` class:
     - Ability to turn off command output per command (for both standard output and standard error)
     - Ability to turn off command output storage on the `SSHSession`? (for both standard output and
@@ -18,3 +17,5 @@
 - Add unit tests
     - Either real ones that use a configuration file to connect to real servers and perform real
       actions, or using a mock library to create fake connection objects.
+- Add code documentation (doc-strings)
+- Add type hints (?)

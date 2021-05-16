@@ -31,13 +31,13 @@ class SSHSessionManager:
         for command in commands:
             ssh_session.run_command_in_ssh_session(command, should_print_output=should_print_output, session_output_lock=session_output_lock)
 
-    def get_command_output_information_dictionary(self, ssh_session, command):
+    def get_command_output_dictionary(self, ssh_session, command):
         if ssh_session in self.ssh_sessions:
-            command_output_information_dictionary = ssh_session.get_command_output_information_dictionary(command)
+            command_output_dictionary = ssh_session.get_command_output_dictionary(command)
         else:
-            command_output_information_dictionary = None
+            command_output_dictionary = None
 
-        return command_output_information_dictionary
+        return command_output_dictionary
 
     def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path):
         for ssh_session in self.ssh_sessions:

@@ -24,7 +24,7 @@ class SSHSession:
 
         self.session_opened_successfully = None
 
-        self.command_to_command_output_information_dictionary = {}
+        self.command_to_command_output_dictionary = {}
 
     def __str__(self):
         return f"{self.name} ({self.ip_address})"
@@ -70,7 +70,7 @@ class SSHSession:
                     self.standard_input_stream.write(command.command_user_input)
                     self.standard_input_stream.flush()
 
-                self.__get_output_information_dictionary(command, should_print_output=should_print_output, session_output_lock=session_output_lock)
+                self.__get_command_output_dictionary(command, should_print_output=should_print_output, session_output_lock=session_output_lock)
             except EOFError as eof_error:
                 self.__information_print(f"Command failed to run with error: \"{eof_error}\".", command)
 
@@ -121,12 +121,12 @@ class SSHSession:
 
     # TODO: Consider the idea of returning this after running `run_command_in_ssh_session()` and from `run_commands_in_all_ssh_sessions()` instead of storing it
     # Not sure which solution is better
-    def get_command_output_information_dictionary(self, command):
-        return self.command_to_command_output_information_dictionary.get(command, None)
+    def get_command_output_dictionary(self, command):
+        return self.command_to_command_output_dictionary.get(command, None)
 
     # This function blocks this thread's execution until standard output, standard error, and the exit code is returned, so that the thread doesn't exit before the command in the
     # session finishes
-    def __get_output_information_dictionary(self, command, should_print_output, session_output_lock):
+    def __get_command_output_dictionary(self, command, should_print_output, session_output_lock):
         if should_print_output and session_output_lock:
             with session_output_lock:
                 self.__information_print("Running command", command)
@@ -137,13 +137,13 @@ class SSHSession:
             standard_output_lines = SSHSession.__capture_output(self.standard_output_stream, should_print_output)
             standard_error_lines = SSHSession.__capture_output(self.standard_error_stream, should_print_output)
 
-        command_output_information_dictionary = {
+        command_output_dictionary = {
             "standard_output_lines": standard_output_lines,
             "standard_error_lines": standard_error_lines,
             "exit_status": self.standard_output_stream.channel.recv_exit_status()
         }
 
-        self.command_to_command_output_information_dictionary[command] = command_output_information_dictionary
+        self.command_to_command_output_dictionary[command] = command_output_dictionary
 
     def __information_print(self, summary, command, border_symbol="*"):
         summary = f"{border_symbol} Summary: {summary} "

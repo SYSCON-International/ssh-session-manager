@@ -1,6 +1,6 @@
 # ssh_session_manager
 
-Open SSH sessions, send commands, and capture output
+Execute commands on multiple remote SSH sessions
 
 [PyPI](https://pypi.org/project/ssh-session-manager/)
 

@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.3.2",
     author="SYSCON International",
     author_email="dev@syscon-intl.com",
-    description="Open SSH sessions, send commands, and capture output",
+    description="Execute commands on multiple remote SSH sessions",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Syscon-Plantstar/ssh-session-manager",

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.4.0
+
+- Added multi-threading to `SSHSessionManager.upload_file()`
+- Added the `should_make_missing_directories` parameter to `SSHSessionManager.upload_file()`
+
 ## v0.3.2
 
 - **Note:** v0.3.2 has breaking changes

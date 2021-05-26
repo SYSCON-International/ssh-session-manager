@@ -39,9 +39,17 @@ class SSHSessionManager:
 
         return command_output_dictionary
 
-    def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path):
+    def upload_file_to_all_sessions(self, local_source_file_path, remote_target_file_path, should_make_missing_directories=True):
+        threads = []
+
         for ssh_session in self.ssh_sessions:
-            ssh_session.upload_file(local_source_file_path, remote_target_file_path)
+            thread = threading.Thread(target=ssh_session.upload_file, args=(local_source_file_path, remote_target_file_path, should_make_missing_directories))
+            thread.start()
+
+            threads.append(thread)
+
+        for thread in threads:
+            thread.join()
 
     def ping_all(self, timeout_in_seconds=4):
         ping_dictionary = {}

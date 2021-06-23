@@ -49,7 +49,7 @@ from ssh_session_manager.SSHSessionManager import SSHSessionManager
 
 
 ssh_session_1 = SSHSession("Silver Server", "10.0.0.57", "user", "password")
-ssh_session_2 = SSHSession("Black Server", "10.0.0.57", "user", "password")
+ssh_session_2 = SSHSession("Black Server", "10.0.0.58", "user", "password")
 
 ssh_sessions = [
     ssh_session_1,

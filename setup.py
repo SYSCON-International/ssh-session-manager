@@ -11,7 +11,7 @@ setuptools.setup(
     description="Execute commands on multiple remote SSH sessions",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Syscon-Plantstar/ssh-session-manager",
+    url="https://github.com/SYSCON-International/ssh-session-manager",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

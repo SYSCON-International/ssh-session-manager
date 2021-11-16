@@ -5,6 +5,13 @@ class SSHSessionManager:
     def __init__(self, ssh_sessions):
         self.ssh_sessions = ssh_sessions
 
+    def __enter__(self):
+        self.open_all_ssh_sessions()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close_all_ssh_sessions()
+
     def open_all_ssh_sessions(self):
         for ssh_session in self.ssh_sessions:
             ssh_session.open_ssh_session()

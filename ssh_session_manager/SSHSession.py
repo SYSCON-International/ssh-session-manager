@@ -29,6 +29,13 @@ class SSHSession:
     def __str__(self):
         return f"{self.name} ({self.ip_address})"
 
+    def __enter__(self):
+        self.open_ssh_session()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close_ssh_session()
+
     def open_ssh_session(self):
         self.__information_print("Opening SSH session", SSHSession.OPEN_SSH_SESSION_WITH_PARAMIKO_TEXT)
 

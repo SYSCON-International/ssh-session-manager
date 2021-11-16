@@ -8,8 +8,6 @@ Execute commands on multiple remote SSH sessions
 ## Example 1: Using the `SSHSession`
 
 ```python
-#!/usr/bin/env python
-
 from ssh_session_manager.Command import Command
 from ssh_session_manager.SSHSession import SSHSession
 
@@ -41,8 +39,6 @@ exit_status = command_output_dictionary["exit_status"]
 ## Example 2: Using the `SSHSessionManager`
 
 ```python
-#!/usr/bin/env python
-
 from ssh_session_manager.Command import Command
 from ssh_session_manager.SSHSession import SSHSession
 from ssh_session_manager.SSHSessionManager import SSHSessionManager

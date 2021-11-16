@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.5.0
+
+- Added context managers to both `SSHSession` and `SSHSessionManager`
+
 ## v0.4.0
 
 - Added multi-threading to `SSHSessionManager.upload_file()`

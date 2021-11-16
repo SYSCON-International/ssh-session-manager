@@ -12,8 +12,6 @@ from ssh_session_manager.Command import Command
 from ssh_session_manager.SSHSession import SSHSession
 
 
-ssh_session = SSHSession("Silver Server", "10.0.0.57", "user", "password")
-
 ls_command = Command("ls -la")
 ps_command = Command("ps -ax")
 
@@ -22,12 +20,9 @@ commands = [
     ps_command
 ]
 
-ssh_session.open_ssh_session()
-
-for command in commands:
-    ssh_session.run_command_in_ssh_session(command)
-
-ssh_session.close_ssh_session()
+with SSHSession("Silver Server", "10.0.0.57", "user", "password") as ssh_session:
+    for command in commands:
+        ssh_session.run_command_in_ssh_session(command)
 
 command_output_dictionary = ssh_session.get_command_output_dictionary(ps_command)
 
@@ -60,10 +55,8 @@ commands = [
     ps_command
 ]
 
-ssh_session_manager = SSHSessionManager(ssh_sessions)
-ssh_session_manager.open_all_ssh_sessions()
-ssh_session_manager.run_commands_in_ssh_sessions(commands)
-ssh_session_manager.close_all_ssh_sessions()
+with SSHSessionManager(ssh_sessions) as ssh_session_manager
+    ssh_session_manager.run_commands_in_ssh_sessions(commands)
 
 command_output_dictionary = ssh_session_manager.get_command_output_dictionary(ssh_session_1, ls_command)
 

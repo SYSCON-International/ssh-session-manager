@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "paramiko==2.7.2",
+        "paramiko>=2.7.2",
         "ping3==2.7.0"
     ]
 )

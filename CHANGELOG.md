@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.5.1
+
+- Allow flexibility in the Paramiko dependency version
+
 ## v0.5.0
 
 - Added context managers to both `SSHSession` and `SSHSessionManager`

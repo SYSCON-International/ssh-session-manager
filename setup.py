@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as file_handle:
 
 setuptools.setup(
     name="ssh-session-manager",
-    version="0.5.0",
+    version="0.5.1",
     author="SYSCON International",
     author_email="dev@syscon-intl.com",
     description="Execute commands on multiple remote SSH sessions",
